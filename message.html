@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Tricy 🌼</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff5f5 0%, #f8f4ff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .birthday-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            border: 1px solid #f0e6ff;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #e8c6ff 0%, #f8f4ff 100%);
+            color: #5a2d8a;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid #f0e6ff;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+        
+        .flower {
+            font-size: 1.5rem;
+            margin: 0 5px;
+            vertical-align: middle;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        p {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .highlight {
+            background-color: #f8f0ff;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        .signature {
+            font-style: italic;
+            margin-top: 30px;
+            text-align: right;
+            color: #5a2d8a;
+            font-weight: bold;
+        }
+        
+        .hearts {
+            position: absolute;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: float 5s infinite;
+        }
+        
+        .nurse-badge {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.8rem;
+        }
+        
+        /* Music control styling */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+            border: 1px solid #f0e6ff;
+        }
+        
+        .music-control:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .music-icon {
+            font-size: 24px;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .music-control {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="birthday-card">
+        <div class="header">
+            <h1>Happy Birthday, Tricy <span class="flower">🌼</span></h1>
+        </div>
+        <div class="content">
+            <p>Today, I celebrate not just the day you were born, but the journey you've walked — a journey filled with trials, strength, and a heart that refuses to give up.</p>
+            
+            <p>I've watched you, in admiration, as you've carried yourself through some of life's darkest storms. You've walked through pain that few people truly understand — the kind that exists deep inside, where it's hard to put into words. <span class="highlight">Depression doesn't just make life difficult; it can make even breathing feel heavy.</span> And yet here you are, still breathing, still standing, still fighting.</p>
+            
+            <p>That alone is something powerful — something worthy of celebration.</p>
+            
+            <p>I know there were days when you probably wanted to disappear, when you felt like the world was too much and your heart was too tired. But you chose to hold on. Even when you felt broken, you picked yourself up. Maybe not all at once — maybe one small piece at a time — but you kept showing up, and that is bravery. That is strength.</p>
+            
+            <p>You chose to keep going, and that choice speaks volumes about who you are.</p>
+            
+            <p>And then, through it all, you still chose to care for others. <span class="highlight">Becoming a nurse — a profession of compassion, sacrifice, and emotional resilience — shows just how incredible you are.</span> You heal people. You comfort them when they are afraid. You give strength to others, even when you are barely holding yourself together. That's something only a rare kind of soul can do.</p>
+
+            <p>You might not always see it, but your presence makes a difference. In ways both big and small, you change lives — just by being you. The world is a little softer, a little warmer, because you're in it.</p>
+            
+            <div class="nurse-badge">💉❤️</div>
+            
+            <p>I hope you know how proud I am of you. How amazed I am by your spirit. You are not just surviving; you are becoming. Every struggle, every tear, every sleepless night — they have all shaped you into the deeply human, incredibly strong woman that you are now.</p>
+            
+            <p> Like wildflowers that bloom after storms, you've grown in places no one expected — and you did it without asking the world for permission. That’s not just survival — that’s transformation. - wild flower methapor</p>
+            
+            <p>You may not always feel strong. You may still have battles left to fight. But please remember: <span class="highlight">you've made it through 100% of your worst days so far</span> — and I believe with all my heart that you will make it through the rest.</p>
+
+            <p>You don't have to be 'all better' to be worthy of love, rest, or joy. You are enough, even on the days when you feel like you aren't.</p>
+            
+            <p>This birthday, I don't wish you just happiness. I wish you peace. I wish you rest. I wish you moments of quiet joy where your heart feels light again. I hope you continue to heal, not just survive. I hope the world gets kinder to you. I hope you see yourself through the eyes of those who love you — strong, resilient, worthy.</p>
+            
+            <p>You're still here. You're still fighting. And you are deeply admired — not for being perfect, but for being real, for being brave, and for never giving up.</p>
+            
+            <p>So here's to another year of you: the soft-hearted, strong-minded, lowkey badass who doesn't give herself enough credit. I hope this year brings you clarity, joy, and unexpected moments of peace... and maybe a few butterflies too (preferably caused by me <span style="font-style: italic;">😌</span>).</p>
+
+            <p>So here’s to healing, to laughter, to late-night talks, to early-morning sunrises — and to a few more butterflies, every time I see you smile.</p>
+
+            <p>I'm so glad the world has you in it — and even more grateful that I do too.</p>
+            
+            <div class="nurse-badge">🎂✨</div>
+            
+            <div class="signature">
+                Happy birthday, nurse-in-the-making.<br>
+                You're doing better than you think. And you're worth more than you know. 
+            </div>
+        </div>
+    </div>
+
+    <!-- Music control button -->
+    <div class="music-control" id="musicControl" onclick="toggleMusic()">
+        <div class="music-icon">🔊</div>
+    </div>
+
+    <!-- Hidden audio element -->
+    <audio id="bgMusic" loop>
+        <!-- Replace with your music file -->
+        <source src="NIKI - You'll be in my heart.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const hearts = ['❤️', '💜', '💙', '💚', '💛', '🧡', '🌸', '🌼', '✨'];
+            const card = document.querySelector('.birthday-card');
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'hearts';
+                heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                
+                card.appendChild(heart);
+            }
+        }
+        
+        // Music control functions
+        const bgMusic = document.getElementById('bgMusic');
+        const musicControl = document.getElementById('musicControl');
+        let musicPlaying = false;
+
+        // Function to toggle music play/pause
+        function toggleMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play()
+                    .then(() => {
+                        musicPlaying = true;
+                        musicControl.innerHTML = '<div class="music-icon">🔊</div>';
+                    })
+                    .catch(error => {
+                        console.error("Error playing music:", error);
+                    });
+            } else {
+                bgMusic.pause();
+                musicPlaying = false;
+                musicControl.innerHTML = '<div class="music-icon">🎵</div>';
+            }
+        }
+
+        // Function to handle autoplay with user interaction
+        function handleAutoplay() {
+            // Try to play music automatically (will work if user has interacted with page before)
+            bgMusic.volume = 0.4; // Set comfortable volume
+            
+            const playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    musicPlaying = true;
+                    musicControl.innerHTML = '<div class="music-icon">🔊</div>';
+                })
+                .catch(error => {
+                    // Autoplay was prevented - show play button
+                    musicPlaying = false;
+                    musicControl.innerHTML = '<div class="music-icon">🎵</div>';
+                    console.log("Autoplay prevented. Waiting for user interaction.");
+                });
+            }
+        }
+
+        // Initialize the page
+        window.onload = function() {
+            createHearts();
+            
+            // Try to start music automatically after a small delay
+            setTimeout(handleAutoplay, 500);
+            
+            // Add click event to document to enable audio on first interaction
+            document.addEventListener('click', function enableAudio() {
+                if (!musicPlaying) {
+                    handleAutoplay();
+                }
+                document.removeEventListener('click', enableAudio);
+            }, { once: true });
+            
+            // Add pulse animation to card
+            document.querySelector('.birthday-card').style.animation = 'pulse 8s infinite';
+        };
+    </script>
+</body>
+</html>

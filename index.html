@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Private Birthday Message</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #ffcce6 0%, #f8e6ff 100%);
+      overflow: hidden;
+      position: relative;
+    }
+    .login-box {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 350px;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+    }
+    h2 {
+      color: #d63384;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+    .input-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    input {
+      padding: 12px 15px;
+      width: 100%;
+      border: 2px solid #f0d6e8;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s;
+      box-sizing: border-box;
+    }
+    input:focus {
+      outline: none;
+      border-color: #d63384;
+      box-shadow: 0 0 0 3px rgba(214, 51, 132, 0.2);
+    }
+    button {
+      padding: 12px 25px;
+      background: linear-gradient(to right, #d63384, #c2185b);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+    }
+    button:hover {
+      background: linear-gradient(to right, #c2185b, #ad1457);
+      transform: translateY(-2px);
+    }
+    #error {
+      color: #e53935;
+      margin-top: 1rem;
+      height: 20px;
+      font-size: 14px;
+    }
+    .hearts {
+      position: absolute;
+      font-size: 1.2rem;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .password-toggle {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #d63384;
+      font-size: 18px;
+    }
+    .clue-box {
+      background-color: #fff9fc;
+      border-left: 4px solid #d63384;
+      padding: 12px;
+      margin: 15px 0;
+      text-align: left;
+      border-radius: 0 8px 8px 0;
+    }
+    .attempts {
+      font-size: 14px;
+      color: #666;
+      margin-top: 10px;
+    }
+    .hint-button {
+      background: none;
+      border: none;
+      color: #d63384;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+      padding: 0;
+    }
+    .hint {
+      display: none;
+      background-color: #fdf2f8;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0;
+      z-index: 10;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    @keyframes float {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 0.8; }
+      100% { transform: translate(var(--random-x), -100vh) rotate(360deg); opacity: 0; }
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    @keyframes celebrate {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Happy Birthday, Soft Soul! 🌸</h2>
+    <p>There's a special message waiting just for you!</p>
+    
+    <div class="clue-box">
+      <strong>Your Clue:</strong> 
+      <p>Bright, cheerful, delicate—but stronger than you think. What flower did I send to you?</p>
+      <p><em>(Hint: it is on spotify)</em></p>
+      <p><em>(Hint: small letter all)</em></p>
+    </div>
+    
+    <p style="color: #666; margin-bottom: 1.5rem;">Enter our special password to continue</p>
+    
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password" autocomplete="off" />
+      <span class="password-toggle" onclick="togglePassword()">👁️</span>
+    </div>
+    
+    <button onclick="checkPassword()">Unlock Your Message</button>
+    
+    <p id="error"></p>
+    <p class="attempts" id="attempts">Attempts remaining: 5</p>
+    
+    <button class="hint-button" onclick="showHint()">Need another hint?</button>
+    <div class="hint" id="hint">
+      <p>This flower comes in many colors, often given as a symbol of cheerfulness. It starts with 'G' and has a name similar to a famous baby brand.</p>
+    </div>
+  </div>
+
+  <script>
+    let attempts = 5;
+    const correctPassword = "gerberas"; // The correct password
+    
+    // Enhanced checkPassword function
+    async function checkPassword() {
+      const input = document.getElementById("password").value.toLowerCase().trim();
+      const errorElement = document.getElementById("error");
+      const attemptsElement = document.getElementById("attempts");
+      
+      if (input === "") {
+        errorElement.textContent = "Please enter the password";
+        shakeError();
+        return;
+      }
+      
+      if (input === correctPassword) {
+        // Correct password - celebrate!
+        celebrate();
+        setTimeout(() => {
+          window.location.href = "message.html"; // Your message page
+        }, 2000);
+      } else {
+        // Wrong password
+        attempts--;
+        attemptsElement.textContent = `Attempts remaining: ${attempts}`;
+        
+        if (attempts <= 0) {
+          errorElement.textContent = "No more attempts left. Please refresh the page to try again.";
+          document.querySelector("button").disabled = true;
+        } else {
+          errorElement.textContent = getCustomErrorMessage(input);
+          shakeError();
+          createHearts();
+        }
+      }
+    }
+    
+    // Generate custom error messages based on input
+    function getCustomErrorMessage(input) {
+      const hints = [
+        "Not quite! Remember the flower I sent you?",
+        "Close but not correct! Think about bright, cheerful flowers.",
+        "That's not it. The first letter is 'G'.",
+        "Try again! The answer is in our shared memories.",
+        "Not the right password. Remember our special moments?"
+      ];
+      
+      // If input starts with correct first letter
+      if (input.charAt(0) === correctPassword.charAt(0)) {
+        return "You're on the right track! First letter is correct.";
+      }
+      
+      // If input length matches
+      if (input.length === correctPassword.length) {
+        return "Right length, but not the correct word.";
+      }
+      
+      // Random hint
+      return hints[Math.floor(Math.random() * hints.length)];
+    }
+    
+    // Show additional hint
+    function showHint() {
+      const hint = document.getElementById("hint");
+      hint.style.display = hint.style.display === "block" ? "none" : "block";
+    }
+    
+    // Toggle password visibility
+    function togglePassword() {
+      const passwordField = document.getElementById("password");
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+      } else {
+        passwordField.type = "password";
+      }
+    }
+    
+    // Shake animation for wrong attempts
+    function shakeError() {
+      const box = document.querySelector('.login-box');
+      box.style.animation = 'shake 0.5s';
+      setTimeout(() => {
+        box.style.animation = '';
+      }, 500);
+    }
+    
+    // Celebration animation for correct password
+    function celebrate() {
+      const box = document.querySelector('.login-box');
+      box.style.animation = 'celebrate 0.5s 2';
+      
+      // Create confetti
+      createConfetti();
+      
+      // Change box style to indicate success
+      box.style.boxShadow = '0 10px 30px rgba(214, 51, 132, 0.5)';
+      box.style.background = 'linear-gradient(to bottom, #ffffff, #fff0f5)';
+      
+      // Change button text
+      document.querySelector("button").textContent = "Success! Unlocking your message...";
+      document.querySelector("button").style.background = 'linear-gradient(to right, #4CAF50, #2E7D32)';
+    }
+    
+    // Create floating hearts for wrong attempts
+    function createHearts() {
+      const hearts = ['❤️', '💖', '💗', '💓', '💞', '💕', '🌸', '🌼'];
+      const container = document.body;
+      
+      for (let i = 0; i < 10; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'hearts';
+        heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = '100vh';
+        heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        heart.style.setProperty('--random-x', (Math.random() * 100 - 50) + 'px');
+        heart.style.animation = `float ${Math.random() * 3 + 2}s linear forwards`;
+        
+        container.appendChild(heart);
+        
+        // Remove heart after animation
+        setTimeout(() => {
+          heart.remove();
+        }, 3000);
+      }
+    }
+    
+    // Create confetti for success
+    function createConfetti() {
+      const colors = ['#ff0000', '#ff00ff', '#00ff00', '#0000ff', '#ffff00', '#00ffff'];
+      const container = document.body;
+      
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = '-10px';
+        confetti.style.width = (Math.random() * 10 + 5) + 'px';
+        confetti.style.height = (Math.random() * 10 + 5) + 'px';
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear forwards`;
+        
+        container.appendChild(confetti);
+        
+        // Remove confetti after animation
+        setTimeout(() => {
+          confetti.remove();
+        }, 3000);
+      }
+    }
+    
+    // Allow submission by pressing Enter key
+    document.getElementById("password").addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        checkPassword();
+      }
+    });
+    
+    // Focus password field on page load with pulsing animation
+    window.onload = function() {
+      const passwordField = document.getElementById("password");
+      passwordField.focus();
+      
+      // Pulse animation for the login box
+      const box = document.querySelector('.login-box');
+      box.style.animation = 'pulse 2s infinite';
+      
+      setTimeout(() => {
+        box.style.animation = '';
+      }, 2000);
+    };
+  </script>
+</body>
+</html>
